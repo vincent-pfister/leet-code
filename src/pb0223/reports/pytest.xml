@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="2" time="0.059" timestamp="2022-11-17T09:59:47.381719" hostname="orion"><testcase classname="src.pb0223.test_rectangle_area" name="test_area[disjoint 1 below 2]" time="0.002" /><testcase classname="src.pb0223.test_rectangle_area" name="test_area[example 1]" time="0.001"><failure message="assert 45 == 51&#10; +  where 51 = &lt;bound method Solution.computeArea of &lt;pb0223.rectangle_area.Solution object at 0x7ff60f077ac0&gt;&gt;(-3, 0, 3, 4, 0, -1, 9, 2)&#10; +    where &lt;bound method Solution.computeArea of &lt;pb0223.rectangle_area.Solution object at 0x7ff60f077ac0&gt;&gt; = &lt;pb0223.rectangle_area.Solution object at 0x7ff60f077ac0&gt;.computeArea&#10; +      where &lt;pb0223.rectangle_area.Solution object at 0x7ff60f077ac0&gt; = Solution()">ax1 = -3, ay1 = 0, ax2 = 3, ay2 = 4, bx1 = 0, by1 = -1, bx2 = 9, by2 = 2
+expected = 45
+
+    @pytest.mark.parametrize("ax1, ay1, ax2, ay2, bx1, by1, bx2, by2, expected", [
+        pytest.param(-3, -3, 0, 0, -2, 1, 4, 3, 21, id="disjoint 1 below 2"),
+        pytest.param(-3, 0, 3, 4, 0, -1, 9, 2, 45, id="example 1"),
+    ])
+    def test_area(ax1: int, ay1: int, ax2: int, ay2: int, bx1: int, by1: int, bx2: int, by2: int, expected: int) -&gt; None:
+&gt;       assert expected == Solution().computeArea(ax1, ay1, ax2, ay2, bx1, by1, bx2, by2)
+E       assert 45 == 51
+E        +  where 51 = &lt;bound method Solution.computeArea of &lt;pb0223.rectangle_area.Solution object at 0x7ff60f077ac0&gt;&gt;(-3, 0, 3, 4, 0, -1, 9, 2)
+E        +    where &lt;bound method Solution.computeArea of &lt;pb0223.rectangle_area.Solution object at 0x7ff60f077ac0&gt;&gt; = &lt;pb0223.rectangle_area.Solution object at 0x7ff60f077ac0&gt;.computeArea
+E        +      where &lt;pb0223.rectangle_area.Solution object at 0x7ff60f077ac0&gt; = Solution()
+
+test_rectangle_area.py:16: AssertionError</failure></testcase></testsuite></testsuites>
