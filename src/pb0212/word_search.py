@@ -2,7 +2,6 @@ from typing import List, Union
 
 import numpy as np
 
-
 PathType = list[tuple[int, int]]
 IndexType = dict[str, set[tuple[int, int]]]
 
@@ -80,7 +79,9 @@ class Solution:
             for j, letter in enumerate(row):
                 letter_index[letter].add((i, j))
 
-        letter_count = {letter: len(locations) for letter, locations in letter_index.items()}
+        letter_count = {
+            letter: len(locations) for letter, locations in letter_index.items()
+        }
         sym_words = [reverse_word(word, letter_count) for word in words]
         word_tree = make_tree(sym_words)
 
