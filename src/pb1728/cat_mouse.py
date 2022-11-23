@@ -89,8 +89,6 @@ class Game:
             else:
                 node.parents.append(parent)
         else:
-            # parent_str = f" <- {parent.turn}" if parent is not None else ""
-            # print(f"add {turn}{parent_str}")
             node = Node(turn, parent=parent)
             self.nodes[turn] = node
             mouse_moves = set(self.board.get_moves(turn.mouse, self.jump.mouse))
@@ -129,7 +127,7 @@ class Game:
                     if node.value:
                         before, after = "[", "]"
                     else:
-                        before, after = "(", ")"
+                        before, after = "((", "))"
                 s = f"T{i}{before}{node.turn.mouse}, {node.turn.cat}{after}"
                 m[node.turn] = f"T{i}"
             return s
@@ -171,7 +169,6 @@ class Node:
 
     def set_mouse_wins(self, mouse_wins: bool) -> None:
         self.has_value = True
-        # print(f"{self.turn}: {'mouse' if mouse_wins else 'cat'} wins")
         self.value = mouse_wins
         for parent in self.parents:
             parent.set_value_from_child(self.turn, mouse_wins)
@@ -181,12 +178,10 @@ class Node:
             return
         if mouse_wins:
             self.wins_for_mouse[turn.mouse] = self.wins_for_mouse[turn.mouse] - 1
-            # print(f"{self.turn}: child update (mouse win): mouse={self.wins_for_mouse} cat={self.wins_for_cat}")
             if min(self.wins_for_mouse.values()) == 0:
                 self.set_mouse_wins(True)
         else:
             self.wins_for_cat[turn.cat] = self.wins_for_cat[turn.cat] - 1
-            # print(f"{self.turn}: child update (cat win): mouse={self.wins_for_mouse} cat={self.wins_for_cat}")
             if min(self.wins_for_cat.values()) == 0:
                 self.set_mouse_wins(False)
 
