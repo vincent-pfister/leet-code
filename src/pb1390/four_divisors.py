@@ -21,6 +21,5 @@ def get_divisors_sum(num: int) -> int:
 
 
 class Solution:
-
     def sumFourDivisors(self, nums: list[int]) -> int:
         return sum(get_divisors_sum(num) for num in nums)

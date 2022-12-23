@@ -29,15 +29,14 @@ DIRECTIONS = [
 
 
 class Board:
-
     def __init__(self, grid: list[str]):
         self.rows = len(grid)
         self.cols = len(grid[0])
         self.grid = grid
         self.flat = "".join(grid)
-        self.food = self.flat.find('F')
-        self.cat = self.flat.find('C')
-        self.mouse = self.flat.find('M')
+        self.food = self.flat.find("F")
+        self.cat = self.flat.find("C")
+        self.mouse = self.flat.find("M")
 
     def to_cell(self, k: int) -> Cell:
         return Cell(k // self.cols, k % self.cols)
@@ -47,7 +46,7 @@ class Board:
 
     def __getitem__(self, item: tuple[int, int] | int):
         k = item if isinstance(item, int) else self.to_index(Cell(*item))
-        return self.flat[k:k + 1]
+        return self.flat[k : k + 1]
 
     def get_moves(self, k: int, jump: int) -> list[int]:
         position = self.to_cell(k)
@@ -75,7 +74,6 @@ class Turn:
 
 
 class Game:
-
     def __init__(self, grid: list[str], cat_jump: int, mouse_jump: int):
         self.board = Board(grid)
         self.jump: Turn = Turn(mouse_jump, cat_jump)
@@ -141,9 +139,7 @@ class Game:
         return "\n".join(txt)
 
 
-
 class Node:
-
     def __init__(self, turn: Turn, parent: Optional["Node"] = None) -> None:
         self.has_value = False
         self.value = False
@@ -160,7 +156,9 @@ class Node:
         else:
             count_mouse_moves = len(mouse_moves)
             count_cat_moves = len(cat_moves)
-            self.wins_for_mouse = {next_mouse: count_cat_moves for next_mouse in mouse_moves}
+            self.wins_for_mouse = {
+                next_mouse: count_cat_moves for next_mouse in mouse_moves
+            }
             self.wins_for_cat = {next_cat: count_mouse_moves for next_cat in cat_moves}
             for next_mouse in mouse_moves:
                 for next_cat in cat_moves:
@@ -187,7 +185,6 @@ class Node:
 
 
 class Solution:
-
     def canMouseWin(self, grid: list[str], catJump: int, mouseJump: int) -> bool:
         game = Game(grid, catJump, mouseJump)
         result = game.play()
