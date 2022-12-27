@@ -1,8 +1,3 @@
-"""Unit tests for ...
-
-(c) Raise Partner 2022
-Vincent Pfister
-"""
 import pytest
 
 from pb2278.percentage import Solution
